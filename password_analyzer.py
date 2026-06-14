@@ -1,50 +1,84 @@
-def check_password_strength(password):
-    score = 0
-    suggestions = []
+import random
+import string
+password = input("Enter a password: ")
 
-    if len(password) >= 8:
-        score += 1
-    else:
-        suggestions.append("Use at least 8 characters.")
+score = 0
+suggestions = []
 
-    if any(char.isupper() for char in password):
-        score += 1
-    else:
-        suggestions.append("Add at least one uppercase letter.")
+weak_passwords = ["password", "password123", "123456", "admin", "qwerty", "letmein", "welcome"]
 
-    if any(char.islower() for char in password):
-        score += 1
-    else:
-        suggestions.append("Add at least one lowercase letter.")
+# Check length
+if len(password) >= 8:
+    print("✓ Password is at least 8 characters long.")
+    score += 1
+else:
+    print("✗ Password is too short. Use at least 8 characters.")
+    suggestions.append("Use at least 8 characters.")
 
-    if any(char.isdigit() for char in password):
-        score += 1
-    else:
-        suggestions.append("Add at least one number.")
+# Check uppercase letters
+if any(char.isupper() for char in password):
+    print("✓ Password contains an uppercase letter.")
+    score += 1
+else:
+    print("✗ Password needs at least one uppercase letter.")
+    suggestions.append("Add at least one uppercase letter.")
 
-    if any(char in "!@#$%^&*()_+-=[]{}|;:,.<>?" for char in password):
-        score += 1
-    else:
-        suggestions.append("Add at least one special character.")
+# Check lowercase letters
+if any(char.islower() for char in password):
+    print("✓ Password contains a lowercase letter.")
+    score += 1
+else:
+    print("✗ Password needs at least one lowercase letter.")
+    suggestions.append("Add at least one lowercase letter.")
 
-    if score <= 2:
-        strength = "Weak"
-    elif score == 3 or score == 4:
-        strength = "Medium"
-    else:
-        strength = "Strong"
+# Check numbers
+if any(char.isdigit() for char in password):
+    print("✓ Password contains a number.")
+    score += 1
+else:
+    print("✗ Password needs at least one number.")
+    suggestions.append("Add at least one number.")
 
-    return strength, suggestions
+# Check special characters
+special_characters = "!@#$%^&*()_-+=<>?/{}[]|"
 
+if any(char in special_characters for char in password):
+    print("✓ Password contains a special character.")
+    score += 1
+else:
+    print("✗ Password needs at least one special character.")
+    suggestions.append("Add at least one special character.")
 
-password = input("Enter a password to check: ")
-strength, suggestions = check_password_strength(password)
+print("\nScore:", score, "/5")
 
-print(f"Password Strength: {strength}")
+if score <= 2:
+    print("Password Strength: Weak")
+elif score <= 4:
+    print("Password Strength: Medium")
+else:
+    print("Password Strength: Strong")
+
+if password.lower() in weak_passwords:
+    print("\nWarning: This is a commonly used weak password.")
+    print("Choose something more unique and harder to guess.")
+    suggestions.append("Avoid common passwords like password123, admin, or qwerty.")
 
 if suggestions:
-    print("Suggestions:")
+    print("\nSuggestions:")
     for suggestion in suggestions:
-        print(f"- {suggestion}")
+        print("-", suggestion)
 else:
-    print("Good job. Your password looks strong.")
+    print("\nGreat job. No suggestions needed.")
+
+generate = input("\nWould you like me to generate a strong password? (yes/no): ")
+
+if generate.lower() == "yes":
+    characters = string.ascii_letters + string.digits + "!@#$%^&*()"
+    generated_password = ""
+
+    for i in range(12):
+        generated_password += random.choice(characters)
+
+    print("\nGenerated Password:", generated_password)
+else:
+    print("\nNo password generated.")
