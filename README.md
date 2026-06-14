@@ -1,19 +1,16 @@
-# password-strength-analyzer
-Python project that checks password strength and gives security suggestions
-# Password Strength Analyzer Using Python
+# Password Strength Analyzer
 
-This project is for my security automation course. The goal of this project is to create a Python program that checks the strength of a password and gives suggestions to help users create stronger passwords.
+This Python project evaluates password strength based on:
 
-## Features
+- Password length
+- Uppercase letters
+- Lowercase letters
+- Numbers
+- Special characters
+- Common weak passwords
 
-- Checks password length
-- Checks for uppercase letters
-- Checks for lowercase letters
-- Checks for numbers
-- Checks for special characters
-- Gives a password strength rating
-- Provides suggestions for improvement
+The program calculates a password strength score, provides recommendations for improvement, and can generate a strong random password.
 
-## Project Status
+## Author
 
-This project is currently in progress for Week 3. I have started the basic Python script and will continue improving the scoring system, weak password checking, testing, and documentation.
+CYB 333 Security Automation Project
